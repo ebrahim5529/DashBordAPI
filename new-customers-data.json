@@ -1,0 +1,130 @@
+{
+  "customers": [
+    {
+      "name": "إبراهيم حمزة",
+      "email": "ibrahim.hamza@example.com",
+      "phone": "91234567",
+      "address": "مسقط، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "INDIVIDUAL",
+      "idNumber": "1234567890",
+      "status": "ACTIVE",
+      "notes": "عميل مميز",
+      "rating": 5
+    },
+    {
+      "name": "فاطمة أحمد",
+      "email": "fatima.ahmed@example.com",
+      "phone": "92345678",
+      "address": "صلالة، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "INDIVIDUAL",
+      "idNumber": "2345678901",
+      "status": "ACTIVE",
+      "notes": "عميلة جديدة",
+      "rating": 4
+    },
+    {
+      "name": "شركة النهضة التجارية",
+      "email": "info@nahda-trading.com",
+      "phone": "93456789",
+      "address": "نزوى، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "COMPANY",
+      "idNumber": "3456789012",
+      "commercialRecord": "CR-2024-NH-001",
+      "status": "ACTIVE",
+      "notes": "شركة تجارية كبيرة",
+      "rating": 5
+    },
+    {
+      "name": "عبدالله السعيد",
+      "email": "abdullah.saeed@example.com",
+      "phone": "94567890",
+      "address": "صور، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "INDIVIDUAL",
+      "idNumber": "4567890123",
+      "status": "ACTIVE",
+      "notes": "عميل منتظم",
+      "rating": 4
+    },
+    {
+      "name": "مريم الحارثي",
+      "email": "mariam.alharthy@example.com",
+      "phone": "95678901",
+      "address": "البريمي، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "INDIVIDUAL",
+      "idNumber": "5678901234",
+      "status": "ACTIVE",
+      "notes": "عميلة نشطة",
+      "rating": 5
+    },
+    {
+      "name": "شركة الأمل للمقاولات",
+      "email": "info@amal-contracting.com",
+      "phone": "96789012",
+      "address": "صحار، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "COMPANY",
+      "idNumber": "6789012345",
+      "commercialRecord": "CR-2024-AM-002",
+      "status": "ACTIVE",
+      "notes": "شركة مقاولات متخصصة",
+      "rating": 5
+    },
+    {
+      "name": "سالم البوسعيدي",
+      "email": "salem.albusaidi@example.com",
+      "phone": "97890123",
+      "address": "الباطنة، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "INDIVIDUAL",
+      "idNumber": "7890123456",
+      "status": "ACTIVE",
+      "notes": "عميل موثوق",
+      "rating": 4
+    },
+    {
+      "name": "نورا الشنفري",
+      "email": "nora.alshanfari@example.com",
+      "phone": "98901234",
+      "address": "ظفار، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "INDIVIDUAL",
+      "idNumber": "8901234567",
+      "status": "ACTIVE",
+      "notes": "عميلة متميزة",
+      "rating": 5
+    },
+    {
+      "name": "شركة المستقبل للاستثمار",
+      "email": "info@future-investment.com",
+      "phone": "99012345",
+      "address": "مسقط، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "COMPANY",
+      "idNumber": "9012345678",
+      "commercialRecord": "CR-2024-FU-003",
+      "status": "ACTIVE",
+      "notes": "شركة استثمارية رائدة",
+      "rating": 5
+    },
+    {
+      "name": "خالد الزدجالي",
+      "email": "khalid.alzadjali@example.com",
+      "phone": "90123456",
+      "address": "مسندم، سلطنة عمان",
+      "nationality": "عماني",
+      "customerType": "INDIVIDUAL",
+      "idNumber": "0123456789",
+      "status": "ACTIVE",
+      "notes": "عميل جديد",
+      "rating": 3
+    }
+  ],
+  "total": 10,
+  "created_at": "2025-10-01T04:46:31.561Z",
+  "description": "عملاء جدد تم إضافتهم للنظام"
+}

@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Production builds
+.next/
+out/
+build/
+dist/
+
+# Environment files
+.env*
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite
+
+# Generated files
+*.d.ts
+*.min.js
+*.min.css
+
+# Prisma
+prisma/migrations/
+
+# Public assets
+public/
+
+# Documentation
+*.md
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Coverage
+coverage/
+
+# Cache
+.cache/
+.parcel-cache/

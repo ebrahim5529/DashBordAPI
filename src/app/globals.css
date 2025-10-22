@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme transitions */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* الخطوط يتم تحميلها عبر Next.js Fonts في layout.tsx */
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 174 60% 50%; /* Teal/Cyan من مجموعة أسهل */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 271 81% 56%; /* Dark Purple من مجموعة أسهل */
+    --secondary-foreground: 0 0% 100%;
+    --accent: 120 61% 50%; /* Green من مجموعة أسهل */
+    --accent-foreground: 0 0% 100%;
+    --tertiary: 33 100% 50%; /* Orange/Gold من مجموعة أسهل */
+    --quaternary: 210 40% 70%; /* Light Blue من مجموعة أسهل */
+    --quaternary-foreground: 0 0% 100%;
+    --quinary: 0 0% 20%; /* Dark Gray/Black من مجموعة أسهل */
+    --quinary-foreground: 0 0% 100%;
+    --senary: 0 0% 90%; /* Light Gray من مجموعة أسهل */
+    --senary-foreground: 0 0% 20%;
+    --tertiary-foreground: 0 0% 100%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Almarai', 'Tajawal', 'Inter', sans-serif;
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* تطبيق خط المري على جميع النصوص العربية */
+  [lang='ar'],
+  [dir='rtl'],
+  .rtl {
+    font-family: 'Almarai', 'Tajawal', 'Arial', sans-serif !important;
+    direction: rtl !important;
+    text-align: right !important;
+  }
+
+  /* خطوط متجاوبة للعربية */
+  .responsive-text {
+    font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+    line-height: 1.5;
+  }
+
+  .responsive-heading {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .responsive-subheading {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    line-height: 1.3;
+  }
+
+  /* تطبيق LTR للنصوص الإنجليزية */
+  [lang='en'],
+  [dir='ltr'],
+  .ltr {
+    direction: ltr !important;
+    text-align: left !important;
+  }
+
+  /* فرض استخدام الأرقام الإنجليزية في جميع حقول الإدخال */
+  input[type='number'],
+  input[type='tel'],
+  input[type='date'],
+  input[type='time'],
+  input[type='datetime-local'],
+  input[type='text'],
+  input[type='email'],
+  input[type='url'],
+  textarea {
+    font-variant-numeric: lining-nums !important;
+  }
+  
+  /* فرض الأرقام الإنجليزية - تطبيق على جميع الأنظمة */
+  input, textarea, select {
+    -webkit-locale: 'en-US' !important;
+  }
+
+  /* تطبيق خط المري على عناصر محددة */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  div,
+  a,
+  button,
+  label,
+  input,
+  select,
+  textarea {
+    font-family: 'Almarai', 'Tajawal', 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-arabic {
+    font-family: 'Almarai', 'Tajawal', sans-serif;
+  }
+
+  .font-almarai {
+    font-family: 'Almarai', 'Tajawal', sans-serif;
+  }
+
+  .font-english {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .rtl {
+    direction: rtl;
+  }
+
+  .ltr {
+    direction: ltr;
+  }
+
+  /* تخصيص Scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground));
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--foreground));
+  }
+
+  /* ألوان مخصصة للـ scrollbar */
+  .scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+  }
+
+  .scrollbar-track-gray-100::-webkit-scrollbar-track {
+    background: #f3f4f6;
+  }
+
+  .dark .scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+    background: #4b5563;
+  }
+
+  .dark .scrollbar-track-gray-800::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+}
+
+/* أنماط الطباعة للفاتورة */
+@media print {
+  /* إخفاء كل شيء ما عدا محتوى الفاتورة */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* إظهار محتوى الفاتورة وسند الاستلام فقط */
+  .print\:block,
+  .print\:block *,
+  .delivery-receipt-print,
+  .delivery-receipt-print * {
+    visibility: visible;
+  }
+  
+  /* إخفاء العناصر غير المطلوبة في الطباعة */
+  .print\:hidden,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* تنسيق الصفحة */
+  @page {
+    size: A4;
+    margin: 0.5cm;
+  }
+  
+  /* ضمان أن الفاتورة وسند الاستلام يأخذان كامل العرض */
+  .print\:w-full,
+  .delivery-receipt-print {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* إزالة الظلال والحدود غير الضرورية */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  /* تحسين الألوان للطباعة */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  /* منع تقسيم الجداول والمحتوى */
+  table,
+  .delivery-receipt-print {
+    page-break-inside: avoid;
+  }
+  
+  /* تحسين الطباعة لصفحة واحدة */
+  .delivery-receipt-print {
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+  }
+  
+  .delivery-receipt-print * {
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+  
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  
+  /* منع تقسيم العناوين */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+}
+
