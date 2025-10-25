@@ -45,7 +45,7 @@ export default function SupplierManagementPage() {
     total: 0,
     lastPage: 1
   });
-  const [filters] = useState<SupplierQueryParams>({
+  const [filters, _setFilters] = useState<SupplierQueryParams>({
     search: '',
     supplier_type: undefined,
     status: undefined,
@@ -185,7 +185,7 @@ export default function SupplierManagementPage() {
   };
 
   // Status Operations (متاحة للاستخدام المستقبلي)
-  const _handleActivate = async (supplier: SupplierTableData) => {
+  const handleActivate = async (supplier: SupplierTableData) => {
     try {
       await activateSupplier(supplier.id);
       toast.success('تم تفعيل المورد بنجاح');
@@ -195,7 +195,7 @@ export default function SupplierManagementPage() {
     }
   };
 
-  const _handleDeactivate = async (supplier: SupplierTableData) => {
+  const handleDeactivate = async (supplier: SupplierTableData) => {
     try {
       await deactivateSupplier(supplier.id);
       toast.success('تم إلغاء تفعيل المورد بنجاح');
@@ -205,7 +205,7 @@ export default function SupplierManagementPage() {
     }
   };
 
-  const _handleSuspend = async (supplier: SupplierTableData) => {
+  const handleSuspend = async (supplier: SupplierTableData) => {
     try {
       await suspendSupplier(supplier.id);
       toast.success('تم تعليق المورد بنجاح');
@@ -454,6 +454,9 @@ export default function SupplierManagementPage() {
                   onDeleteSupplier={handleDeleteSupplier}
                   onViewSupplier={handleViewSupplier}
                   onExportSuppliers={handleExportSuppliers}
+                  onActivate={handleActivate}
+                  onDeactivate={handleDeactivate}
+                  onSuspend={handleSuspend}
                 />
                 
                 {/* Pagination */}

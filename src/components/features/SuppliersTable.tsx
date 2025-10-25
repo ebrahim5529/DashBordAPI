@@ -49,6 +49,9 @@ interface SuppliersTableProps {
   onDeleteSupplier: (supplier: SupplierTableData) => void;
   onViewSupplier: (supplier: SupplierTableData) => void;
   onExportSuppliers: () => void;
+  onActivate?: (supplier: SupplierTableData) => void;
+  onDeactivate?: (supplier: SupplierTableData) => void;
+  onSuspend?: (supplier: SupplierTableData) => void;
 }
 
 export function SuppliersTable({
@@ -58,6 +61,9 @@ export function SuppliersTable({
   onDeleteSupplier,
   onViewSupplier,
   onExportSuppliers,
+  onActivate,
+  onDeactivate,
+  onSuspend,
 }: SuppliersTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -246,6 +252,40 @@ export function SuppliersTable({
                   <Mail className="h-3 w-3" />
                 </Button>
               )}
+              {/* Status Action Buttons */}
+              {supplier.status === 'INACTIVE' && onActivate && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onActivate(supplier)}
+                  className="h-6 w-6 p-0 text-green-600 hover:text-green-700"
+                  title="تفعيل"
+                >
+                  <User className="h-3 w-3" />
+                </Button>
+              )}
+              {supplier.status === 'ACTIVE' && onDeactivate && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onDeactivate(supplier)}
+                  className="h-6 w-6 p-0 text-yellow-600 hover:text-yellow-700"
+                  title="إلغاء تفعيل"
+                >
+                  <User className="h-3 w-3" />
+                </Button>
+              )}
+              {supplier.status === 'ACTIVE' && onSuspend && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onSuspend(supplier)}
+                  className="h-6 w-6 p-0 text-orange-600 hover:text-orange-700"
+                  title="تعليق"
+                >
+                  <AlertTriangle className="h-3 w-3" />
+                </Button>
+              )}
               <Button
                 variant="ghost"
                 size="sm"
@@ -260,7 +300,7 @@ export function SuppliersTable({
         },
       },
     ],
-    [onViewSupplier, onEditSupplier, onDeleteSupplier]
+    [onViewSupplier, onEditSupplier, onDeleteSupplier, onActivate, onDeactivate, onSuspend]
   );
 
   // إنشاء الجدول

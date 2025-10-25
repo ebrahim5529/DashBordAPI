@@ -1,0 +1,806 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "EasyLoman API",
+		"description": "مجموعة طلبات API لنظام EasyLoman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "🔓 Authentication",
+			"item": [
+				{
+					"name": "Test Connection",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/test",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"test"
+							]
+						},
+						"description": "اختبار الاتصال بـ API"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    if (response.data && response.data.token) {",
+									"        pm.environment.set('TOKEN', response.data.token);",
+									"        pm.test('Token saved successfully', () => {",
+									"            pm.expect(response.data.token).to.not.be.undefined;",
+									"        });",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@easyloman.com\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "تسجيل الدخول للحصول على Token"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"أحمد محمد\",\n  \"email\": \"ahmed@example.com\",\n  \"phone\": \"+968501234567\",\n  \"password\": \"12345678\",\n  \"password_confirmation\": \"12345678\",\n  \"role\": \"USER\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/register",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "تسجيل مستخدم جديد"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/auth/me",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						},
+						"description": "الحصول على معلومات المستخدم الحالي"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/auth/logout",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						},
+						"description": "تسجيل الخروج"
+					},
+					"response": []
+				}
+			],
+			"description": "طلبات المصادقة والتوثيق"
+		},
+		{
+			"name": "👥 Customers",
+			"item": [
+				{
+					"name": "Get All Customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/customers?page=1&limit=10",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"customers"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "الحصول على جميع العملاء مع Pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/customers/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"customers",
+								"1"
+							]
+						},
+						"description": "الحصول على عميل محدد"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"سالم أحمد\",\n  \"email\": \"salem@example.com\",\n  \"phone\": \"+968501234567\",\n  \"address\": \"مسقط، سلطنة عمان\",\n  \"national_id\": \"1234567890\",\n  \"company\": \"شركة سالم للتجارة\",\n  \"notes\": \"عميل جديد\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/customers",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"customers"
+							]
+						},
+						"description": "إنشاء عميل جديد"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"سالم أحمد علي\",\n  \"email\": \"salem.ali@example.com\",\n  \"phone\": \"+968501234567\",\n  \"address\": \"مسقط، سلطنة عمان - منطقة القرم\",\n  \"company\": \"شركة سالم علي للتجارة العامة\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/customers/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"customers",
+								"1"
+							]
+						},
+						"description": "تحديث بيانات العميل"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/customers/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"customers",
+								"1"
+							]
+						},
+						"description": "حذف العميل"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/customers/stats",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"customers",
+								"stats"
+							]
+						},
+						"description": "إحصائيات العملاء"
+					},
+					"response": []
+				}
+			],
+			"description": "إدارة العملاء"
+		},
+		{
+			"name": "📄 Contracts",
+			"item": [
+				{
+					"name": "Get All Contracts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/contracts",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"contracts"
+							]
+						},
+						"description": "الحصول على جميع العقود"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Contract",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customer_id\": 1,\n  \"contract_number\": \"CON-2024-001\",\n  \"title\": \"عقد توريد مواد بناء\",\n  \"description\": \"توريد مواد بناء لمشروع سكني\",\n  \"start_date\": \"2024-01-01\",\n  \"end_date\": \"2024-12-31\",\n  \"total_amount\": 50000.00,\n  \"currency\": \"OMR\",\n  \"status\": \"active\",\n  \"terms\": \"شروط العقد التفصيلية\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/contracts",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"contracts"
+							]
+						},
+						"description": "إنشاء عقد جديد"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expired Contracts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/contracts/expired",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"contracts",
+								"expired"
+							]
+						},
+						"description": "الحصول على العقود المنتهية الصلاحية"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Contracts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/contracts/active",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"contracts",
+								"active"
+							]
+						},
+						"description": "الحصول على العقود النشطة"
+					},
+					"response": []
+				},
+				{
+					"name": "Download Contract PDF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/contracts/1/pdf",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"contracts",
+								"1",
+								"pdf"
+							]
+						},
+						"description": "تحميل PDF العقد"
+					},
+					"response": []
+				}
+			],
+			"description": "إدارة العقود"
+		},
+		{
+			"name": "💰 Payments",
+			"item": [
+				{
+					"name": "Get All Payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/payments",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"payments"
+							]
+						},
+						"description": "الحصول على جميع المدفوعات"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"contract_id\": 1,\n  \"amount\": 5000.00,\n  \"payment_date\": \"2024-01-15\",\n  \"payment_method\": \"bank_transfer\",\n  \"reference_number\": \"REF-2024-001\",\n  \"notes\": \"دفعة أولى\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/payments",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"payments"
+							]
+						},
+						"description": "إنشاء دفعة جديدة"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Check Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "check_image",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/payments/1/upload-check-image",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"payments",
+								"1",
+								"upload-check-image"
+							]
+						},
+						"description": "رفع صورة الشيك"
+					},
+					"response": []
+				}
+			],
+			"description": "إدارة المدفوعات"
+		},
+		{
+			"name": "📊 Dashboard",
+			"item": [
+				{
+					"name": "Get Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/dashboard/stats",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"dashboard",
+								"stats"
+							]
+						},
+						"description": "الحصول على إحصائيات Dashboard"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Charts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/dashboard/charts",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"dashboard",
+								"charts"
+							]
+						},
+						"description": "الحصول على بيانات الرسوم البيانية"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recent Activity",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/dashboard/recent-activity",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"dashboard",
+								"recent-activity"
+							]
+						},
+						"description": "الحصول على النشاط الأخير"
+					},
+					"response": []
+				}
+			],
+			"description": "Dashboard والإحصائيات"
+		},
+		{
+			"name": "📤 Upload",
+			"item": [
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "folder",
+									"value": "customers",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/upload/image",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"upload",
+								"image"
+							]
+						},
+						"description": "رفع صورة"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "document",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "folder",
+									"value": "contracts",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/upload/document",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"upload",
+								"document"
+							]
+						},
+						"description": "رفع مستند"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Signature",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "signature",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "customer_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/upload/signature",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"upload",
+								"signature"
+							]
+						},
+						"description": "رفع توقيع"
+					},
+					"response": []
+				}
+			],
+			"description": "رفع الملفات"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "API_URL",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
